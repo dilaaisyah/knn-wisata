@@ -1,0 +1,41 @@
+/*homepage*/
+#recomended .portfolio-item figcaption{ 
+    padding: 25px; 
+    color: #212121;
+}
+
+/*homepage - gallery*/
+#gallery .carousel-inner{ max-height: 480px; }
+
+/*question - slider*/
+#carousel-question .carousel-inner > .item {
+    margin: 50px 100px;
+    padding: 30px 40px 20px;
+    border: 1px solid #c97e69;
+    border-radius: 15px;
+    background-color: #F4F4F4;
+    font-size: 15px;
+}
+#carousel-question .carousel-inner > .item .item-detail{
+    margin-bottom: 25px;
+}
+#carousel-question .carousel-inner > .item .item-detail h3{
+	color: #9e4f38;
+    border-bottom: 1px solid #c97e69;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+#carousel-question .carousel-inner > .item .item-detail p{ margin: 0 0 10px; }
+#carousel-question .carousel-inner > .item .item-detail input[type="radio"]{ 
+    margin-right: 10px;
+    vertical-align: sub;
+}
+.container.question,
+.submit-button{ display: none; }
+#carousel-question .carousel-inner > .item .item-detail p.submit-button{ margin-top: 20px; }
+
+/*blog detail*/
+.blog-post .featured-img{ margin-right: 20px; }
+.blog-item-header h2{ text-transform: capitalize; }
+.recent-post img{ max-width: 92px; }
