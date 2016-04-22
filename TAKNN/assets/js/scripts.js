@@ -1,7 +1,7 @@
 
 /* Portfolio */
 $(window).load(function() {
-    var $cont = $('.portfolio-group');
+    var $cont = $('.portfolio');
 
 
     $cont.isotope({

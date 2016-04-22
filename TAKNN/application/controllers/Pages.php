@@ -9,6 +9,9 @@
         private function render_view($view = NULL, $data){
             if($view == 'map'){
                 $data['add_js'] = $data['map']['js'];
+            }else if($view == 'gallery'){
+                $data['add_js'] = '<script type="text/javascript" src="'.base_url().'assets/js/jquery.fancybox.js"></script>
+                                   <link rel="stylesheet" type="text/css" href="'.base_url().'assets/css/jquery.fancybox.css" media="screen" />';
             }else{
                 $data['add_js'] = '';
             }
@@ -47,8 +50,21 @@
             $this->render_view('map', $data);
         }
 
+        public function gallery(){
+            $data['gallery'] = $this->get_model->get_gallery();
+            $data['title'] = 'Gallery';
+            $this->render_view('gallery', $data);
+        }
+
         public function blogs() {
-            $data['blogs'] = $this->get_model->get_blog();
+            $page = $this->uri->segment(3, 1);
+            $limit = 10;
+            $data['blogs'] = $this->get_model->get_blog($page, $limit);
+            $data['pagination'] = array(
+                                    'count' => $this->get_model->count_blog(),
+                                    'page' => $page,
+                                    'limit' => $limit
+                                  );
             $data['sidebar'] = $this->get_model->get_sidebar_blog();
             $data['title'] = 'Blog';
             $this->render_view('blog', $data);

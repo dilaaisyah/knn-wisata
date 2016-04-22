@@ -83,7 +83,7 @@
                                     <a href="<?php echo base_url();?>">Home</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>index.php/pages/map">Map</a>
+                                    <a href="<?php echo base_url();?>pages/map">Map</a>
                                 </li>
                             </ul>
                         </div>
@@ -92,13 +92,12 @@
             </div>
             <!-- End Footer Menu -->
             <!-- JS -->
-            <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="<?php echo base_url();?>assets/js/scripts.js"></script>
             <!-- Isotope - Portfolio Sorting -->
-            <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.isotope.js" type="text/javascript"></script>
+            <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.isotope.js"></script>
             <!-- Mobile Menu - Slicknav -->
-            <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.slicknav.js" type="text/javascript"></script>
+            <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.slicknav.js"></script>
             <!-- Animate on Scroll-->
             <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.visible.js" charset="utf-8"></script>
             <!-- Sticky Div -->

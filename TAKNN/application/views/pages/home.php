@@ -32,7 +32,7 @@ if($blog_count>0){?>
 <div class="container">
     <div class="row margin-vert-30">
         <div class="col-md-12">
-            <h2>Recomended Destination</h2>                        
+            <h2>Featured Blog</h2>                        
         </div>
     </div>
     <div class="row">
@@ -41,15 +41,16 @@ if($blog_count>0){?>
             <!-- Portfolio Item -->
             <div class="col-md-4 portfolio-item margin-bottom-40 design">
                 <div>
-                    <a href="<?php echo base_url().'index.php/pages/blog/'.$blog['id'].'/';?>">
+                    <a href="<?php echo base_url().'pages/blog/'.$blog['id'].'/';?>">
                         <figure>
                             <?php if($blog['image']){?>
                             <img src="<?php echo base_url().'uploads/blogs/'.$blog['image'];?>" alt="<?php echo $blog['title'];?>">
                             <?php }else{?>
-                                <img src="<?php echo base_url();?>assets/img/portfolio/image1.jpg" alt="image1">
+                                <img src="<?php echo base_url();?>assets/img/no_image.jpg" alt="no-image" height="197" class="no-image">
                             <?php }?>
-                            <figcaption>
-                                <?php echo ($blog['excerpt'])?$blog['excerpt']:$blog['content'];?>
+                            <figcaption class="eqHeight">
+                                <p class="category"><span><?php echo $blog['category'];?></span></p>
+                                <p class="title"><?php echo $blog['title'];?></p> 
                             </figcaption>
                         </figure>
                     </a>

@@ -15,14 +15,37 @@
             return $query->result_array();          
         }
 
-        public function get_featured_blog() {           
-            $query = $this->db->get_where('blogs', array('featured' => 1));
+        public function get_featured_blog() {  
+            $this->db->select('blogs.*, categories.title as category');
+            $this->db->from('blogs');
+            $this->db->join('categories', 'categories.id = blogs.category');
+            $this->db->where('featured', 1); 
+            $this->db->where('publish', 1); 
+            $query = $this->db->get();
             return $query->result_array();          
         }
 
-		public function get_blog() {          
-            $query = $this->db->get('blogs');
+        public function get_gallery() {          
+            $query = $this->db->get_where('slides', array('active' => '1'));
             return $query->result_array();        
+        }
+
+		public function get_blog($page, $limit) {
+            $index = ($page-1)*$limit;  
+                     
+            $this->db->select('blogs.*, categories.title as category');
+            $this->db->from('blogs');
+            $this->db->join('categories', 'categories.id = blogs.category');
+            $this->db->where('publish', 1); 
+            $this->db->limit($limit, $index);
+            $query = $this->db->get();
+            return $query->result_array();        
+        }
+
+        public function count_blog() {          
+            $this->db->where('publish', 1); 
+            $this->db->from('blogs');
+            return $this->db->count_all_results();     
         }
 
         public function get_detail_blog($id) {          

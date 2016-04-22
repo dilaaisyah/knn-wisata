@@ -7,7 +7,7 @@
                     <div class="signup-header">
                         <h2>Register a new account</h2>
                         <p>Already a member? Click
-                            <a href="<?php echo base_url().'index.php/pages/login/';?>">HERE</a> to login to your account.</p>
+                            <a href="<?php echo base_url().'pages/login/';?>">HERE</a> to login to your account.</p>
                     </div>
                     <?php echo validation_errors(); ?>
                     <label>Username

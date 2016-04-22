@@ -16,7 +16,9 @@
                     <!-- Date -->
                     <div class="blog-post-details-item blog-post-details-item-left">
                         <i class="fa fa-calendar color-gray-light"></i>
-                        <a href="#">22nd Apr, 2014</a>
+                        <?php $date=date_create($blog['publish_date']);
+                        $format_date = date_format($date,"jS M, Y");
+                        echo $format_date;?>
                     </div>
                     <!-- End Date -->
                 </div>

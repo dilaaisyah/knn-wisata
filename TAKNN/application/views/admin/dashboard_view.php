@@ -4,7 +4,7 @@
         <h1 class="page-header"><?php echo $title;?></h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url();?>index.php/admin/">Dashboard</a>
+                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url();?>admin/">Dashboard</a>
             </li>
             <li class="active">
                 <?php echo $subtitle;?>

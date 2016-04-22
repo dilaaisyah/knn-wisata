@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url();?>index.php/admin/">TA Admin</a>
+                <a class="navbar-brand" href="<?php echo base_url();?>admin/">TA Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">                
@@ -68,11 +68,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $username;?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="<?php echo base_url();?>index.php/admin/dashboard/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="<?php echo base_url();?>admin/dashboard/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="<?php echo base_url();?>index.php/pages/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<?php echo base_url();?>pages/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -81,30 +81,30 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="<?php echo base_url();?>index.php/admin/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="<?php echo base_url();?>admin/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list-alt"></i> Blogs <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/admin/dashboard/blog">Blogs</a>
+                                <a href="<?php echo base_url();?>admin/dashboard/blog">Blogs</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/admin/dashboard/category">Blog Category</a>
+                                <a href="<?php echo base_url();?>admin/dashboard/category">Blog Category</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/admin/dashboard/question"><i class="fa fa-fw fa-question"></i> Questions</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/question"><i class="fa fa-fw fa-question"></i> Questions</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/admin/dashboard/slide"><i class="fa fa-fw fa-picture-o"></i> Slides</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/slide"><i class="fa fa-fw fa-picture-o"></i> Slides / Gallery</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/admin/dashboard/map"><i class="fa fa-fw fa-map-marker"></i> Maps</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/map"><i class="fa fa-fw fa-map-marker"></i> Maps</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/admin/dashboard/user"><i class="fa fa-fw fa-users"></i> Users</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/user"><i class="fa fa-fw fa-users"></i> Users</a>
                     </li>
                 </ul>
             </div>

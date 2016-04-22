@@ -15,6 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <!-- Favicon -->
         <link href="favicon.ico" rel="shortcut icon">
+        <!-- Jquery -->
+        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
         <!-- Template CSS -->
@@ -27,7 +29,7 @@
         <!-- Google Fonts-->
         <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
-
+        <!-- optional css & js -->
         <?php echo $add_js;?>
         
     </head>
@@ -63,34 +65,36 @@
                                     <ul id="hornavmenu" class="nav navbar-nav">
                                         <li>
                                             <a href="<?php echo base_url();?>" class="fa-home">Home</a>
+                                        </li><li>
+                                            <a href="<?php echo base_url();?>pages/gallery">Gallery</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url();?>index.php/pages/blogs">Blog</a>
+                                            <a href="<?php echo base_url();?>pages/blogs">Blog</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url();?>index.php/pages/map">Maps</a>
+                                            <a href="<?php echo base_url();?>pages/map">Maps</a>
                                         </li>
                                         <?php if($this->session->userdata('loggedin')):?>
                                         <li>
-                                            <a href="<?php echo base_url();?>index.php/pages/question">Questions</a>
+                                            <a href="<?php echo base_url();?>pages/question">Questions</a>
                                         </li>
                                         <?php endif;?>
                                         <?php if($this->session->userdata('loggedin')):?>
                                             <?php $session_data = $this->session->userdata('loggedin');
                                             if($session_data['role']=='administrator') :?>
                                                 <li>                                            
-                                                    <a href="<?php echo base_url();?>index.php/admin">Admin Panel</a>
+                                                    <a href="<?php echo base_url();?>admin">Admin Panel</a>
                                                 </li>
                                             <?php endif;?>
                                             <li>                                            
-                                                <a href="<?php echo base_url();?>index.php/pages/logout">Logout</a>
+                                                <a href="<?php echo base_url();?>pages/logout">Logout</a>
                                             </li>
                                         <?php else:?>
                                             <li>
-                                                <a href="<?php echo base_url();?>index.php/pages/login">Login</a>
+                                                <a href="<?php echo base_url();?>pages/login">Login</a>
                                             </li>
                                             <li>
-                                                <a href="<?php echo base_url();?>index.php/pages/register">Register</a>
+                                                <a href="<?php echo base_url();?>pages/register">Register</a>
                                             </li>
                                         <?php endif;?>
                                     </ul>

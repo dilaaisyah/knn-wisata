@@ -9,19 +9,21 @@
             <?php foreach ($sidebar as $blog) {?>
             <li>
                 <div class="recent-post">
-                    <a href="<?php echo base_url().'index.php/pages/blog/'.$blog['id'].'/';?>">
+                    <a href="<?php echo base_url().'pages/blog/'.$blog['id'].'/';?>">
                         <?php if($blog['image']){?>
                             <img class="pull-left" src="<?php echo base_url().'uploads/blogs/'.$blog['image'];?>" alt="<?php echo $blog['title'];?>">
                         <?php }else{?>
-                            <img class="pull-left" src="<?php echo base_url();?><?php echo base_url();?>assets/img/portfolio/image1.jpg" alt="image1">
+                            <img class="pull-left" src="<?php echo base_url();?>assets/img/no_image.jpg" alt="no-image" width="90" class="no-image">
                         <?php }?>
                     </a>
-                    <a href="<?php echo base_url().'index.php/pages/blog/'.$blog['id'].'/';?>" class="posts-list-title">
+                    <a href="<?php echo base_url().'pages/blog/'.$blog['id'].'/';?>" class="posts-list-title">
                         <?php echo $blog['title'];?>
                     </a>
                     <br>
                     <span class="recent-post-date">
-                        July 30, 2013
+                        <?php $date=date_create($blog['publish_date']);
+                        $format_date = date_format($date,"jS M, Y");
+                        echo $format_date;?>
                     </span>
                 </div>
                 <div class="clearfix"></div>

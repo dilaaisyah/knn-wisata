@@ -11,7 +11,7 @@
 	                <div class="blog-item-header">
 	                    <!-- Title -->
 	                    <h2>
-	                        <a href="<?php echo base_url().'index.php/pages/blog/'.$blog['id'].'/';?>">
+	                        <a href="<?php echo base_url().'pages/blog/'.$blog['id'].'/';?>">
 	                           <?php echo $blog['title']?></a>
 	                    </h2>
 	                    <div class="clearfix"></div>
@@ -29,7 +29,14 @@
 	                    <!-- Date -->
 	                    <div class="blog-post-details-item blog-post-details-item-left">
 	                        <i class="fa fa-calendar color-gray-light"></i>
-	                        <a href="#">22nd Apr, 2014</a>
+	                        <?php $date=date_create($blog['publish_date']);
+							$format_date = date_format($date,"jS M, Y");
+							echo $format_date;?>
+	                    </div>
+	                    <!-- End Date -->
+	                    <!-- Category -->
+	                    <div class="blog-post-details-item blog-post-details-item-left">
+	                        <?php echo $blog['category'];?>
 	                    </div>
 	                    <!-- End Date -->
 	                </div>
@@ -38,17 +45,17 @@
 	                <div class="blog">
 	                    <div class="clearfix"></div>
 	                    <div class="blog-post-body row margin-top-15">
-	                        <div class="col-md-5">
+	                        <div class="col-md-5"<?php if(!$blog['image']){echo ' style="text-align: center;"';}?>>
 	                            <?php if($blog['image']){?>
 	                            <img src="<?php echo base_url().'uploads/blogs/'.$blog['image'];?>" alt="<?php echo $blog['title'];?>">
 	                            <?php }else{?>
-	                                <img src="<?php echo base_url();?><?php echo base_url();?>assets/img/portfolio/image1.jpg" alt="image1">
+	                                <img src="<?php echo base_url();?>assets/img/no_image.jpg" alt="no-image" height="185" class="no-image">
 	                            <?php }?>
 	                        </div>
 	                        <div class="col-md-7">
 	                            <?php echo ($blog['excerpt'])?$blog['excerpt']:$blog['content'];?>
 	                            <!-- Read More -->
-	                            <a href="<?php echo base_url().'index.php/pages/blog/'.$blog['id'].'/';?>" class="btn btn-primary">
+	                            <a href="<?php echo base_url().'pages/blog/'.$blog['id'].'/';?>" class="btn btn-primary">
 	                                Read More
 	                                <i class="icon-chevron-right readmore-icon"></i>
 	                            </a>
@@ -61,29 +68,34 @@
 	            <!-- End Blog Item -->
 	        <?php } }?>
             <!-- Pagination -->
-            <!-- <ul class="pagination">
+            <?php $count = $pagination['count'];
+            	$limit = $pagination['limit'];
+            	$page = $pagination['page'];
+            	$count_page = ceil($count/$limit);
+            ?>
+            <?php if( $count > 0 ): ?>
+            <ul class="pagination">
+            	<?php if( $count_page > 1 && $page > 1):?>
                 <li>
-                    <a href="#">&laquo;</a>
+                    <a href="<?php echo base_url().'pages/blogs/'.($page-1);?>">&laquo;</a>
                 </li>
-                <li class="active">
-                    <a href="#">1</a>
-                </li>
+            	<?php endif;?>
+            	<?php for ($i=1; $i <= $count_page; $i++):?>
+            		<li class="<?php echo ($i==$page)?'active':'';?>">
+            			<?php if($i==$page):?>
+	                		<span><?php echo $i;?></span>
+	                	<?php else:?>
+	                		<a href="<?php echo base_url().'pages/blogs/'.$i;?>"><?php echo $i;?></a>
+	            		<?php endif;?>
+	                </li>
+            	<?php endfor;?>
+                <?php if( $count_page > $page && $page > 0):?>
                 <li>
-                    <a href="#">2</a>
+                    <a href="<?php echo base_url().'pages/blogs/'.($page+1);?>">&raquo;</a>
                 </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#">5</a>
-                </li>
-                <li>
-                    <a href="#">&raquo;</a>
-                </li>
-            </ul> -->
+                <?php endif;?>
+            </ul>
+        	<?php endif;?>
             <!-- End Pagination -->
         </div>
         <!-- End Main Column -->
