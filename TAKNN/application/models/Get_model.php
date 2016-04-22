@@ -81,5 +81,17 @@
             if ($result) return $this->db->insert_id();
             else return false;
         }
+
+        public function insert_survei($data){
+            $result = $this->db->insert('survei', $data);
+            if ($result) return $this->db->insert_id();
+            else return false;
+        }
+
+        public function insert_survei_detail($data){
+            $result = $this->db->insert_batch('survei_detail', $data);
+            if ($result) return true;
+            else return false;
+        }
 	}
 ?>

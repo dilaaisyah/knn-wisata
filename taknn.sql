@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 25, 2016 at 09:15 AM
--- Server version: 5.6.20
--- PHP Version: 5.5.15
+-- Host: localhost:3306
+-- Generation Time: Apr 22, 2016 at 04:40 PM
+-- Server version: 5.5.42
+-- PHP Version: 5.6.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Database: `taknn`
+-- Database: `dila_taknn`
 --
 
 -- --------------------------------------------------------
@@ -26,27 +20,28 @@ SET time_zone = "+00:00";
 -- Table structure for table `blogs`
 --
 
-CREATE TABLE IF NOT EXISTS `blogs` (
-`id` smallint(6) NOT NULL,
+CREATE TABLE `blogs` (
+  `id` smallint(6) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `image` text NOT NULL,
   `excerpt` text NOT NULL,
   `category` smallint(6) NOT NULL,
   `featured` smallint(1) NOT NULL DEFAULT '0',
-  `publish_date` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `publish_date` date NOT NULL,
+  `publish` smallint(1) DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `blogs`
 --
 
-INSERT INTO `blogs` (`id`, `title`, `content`, `image`, `excerpt`, `category`, `featured`, `publish_date`) VALUES
-(1, 'testing blog', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', 'a3d30-image1.jpg', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test</p>\r\n', 2, 1, '2016-03-01'),
-(2, 'gunung', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '88172-image1.jpg', '<p>\r\n	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 2, 1, '2016-03-01'),
-(3, 'blog 2', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '8ff95-image9.jpg', '<p>\r\n	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 1, 1, '2016-03-01'),
-(4, 'test blog 3', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '63473-image12.jpg', '<p>\r\n	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 1, 1, '2016-03-01'),
-(5, 'test blog 5', '<p>\r\n	test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '437d6-image3.jpg', '<p>\r\n	Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 2, 0, '2016-03-01');
+INSERT INTO `blogs` (`id`, `title`, `content`, `image`, `excerpt`, `category`, `featured`, `publish_date`, `publish`) VALUES
+(1, 'testing blog', '<p>\r\n  test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '', '<p>\r\n test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test</p>\r\n', 2, 1, '2016-03-01', 1),
+(2, 'gunung', '<p>\r\n  test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '88172-image1.jpg', '<p>\r\n Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 2, 1, '2016-03-01', 1),
+(3, 'blog 2', '<p>\r\n  test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '8ff95-image9.jpg', '<p>\r\n Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 1, 1, '2016-03-01', 1),
+(4, 'test blog 3', '<p>\r\n test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '63473-image12.jpg', '<p>\r\n  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 1, 1, '2016-03-01', 1),
+(5, 'test blog 5', '<p>\r\n test content test content test content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test contenttest content test content</p>\r\n', '437d6-image3.jpg', '<p>\r\n Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>\r\n', 2, 0, '2016-03-01', 1);
 
 -- --------------------------------------------------------
 
@@ -54,11 +49,11 @@ INSERT INTO `blogs` (`id`, `title`, `content`, `image`, `excerpt`, `category`, `
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
-`id` smallint(6) NOT NULL,
+CREATE TABLE `categories` (
+  `id` smallint(6) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
@@ -74,12 +69,12 @@ INSERT INTO `categories` (`id`, `title`, `description`) VALUES
 -- Table structure for table `maps`
 --
 
-CREATE TABLE IF NOT EXISTS `maps` (
-`id` smallint(6) NOT NULL,
+CREATE TABLE `maps` (
+  `id` smallint(6) NOT NULL,
   `title` varchar(255) NOT NULL,
   `lat` varchar(255) NOT NULL,
   `long` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `maps`
@@ -95,12 +90,12 @@ INSERT INTO `maps` (`id`, `title`, `lat`, `long`) VALUES
 -- Table structure for table `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
-`id` smallint(2) NOT NULL,
+CREATE TABLE `questions` (
+  `id` smallint(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `choice1` text NOT NULL,
   `choice2` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questions`
@@ -171,25 +166,74 @@ INSERT INTO `questions` (`id`, `title`, `choice1`, `choice2`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `recommendation`
+--
+
+CREATE TABLE `recommendation` (
+  `id` smallint(6) NOT NULL,
+  `recommendation` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result`
+--
+
+CREATE TABLE `result` (
+  `id` int(11) NOT NULL,
+  `survei` smallint(6) NOT NULL,
+  `recommendation` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `slides`
 --
 
-CREATE TABLE IF NOT EXISTS `slides` (
-`id` smallint(3) NOT NULL,
+CREATE TABLE `slides` (
+  `id` smallint(3) NOT NULL,
   `title` varchar(200) NOT NULL,
   `image_url` text NOT NULL,
+  `description` text NOT NULL,
   `active` smallint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `slides`
 --
 
-INSERT INTO `slides` (`id`, `title`, `image_url`, `active`) VALUES
-(3, 'slide 1', 'b2e8a-slide2.jpg', 0),
-(4, 'slide 2', '99397-slide1.jpg', 1),
-(5, 'slide 3', '75895-slide3.jpg', 1),
-(6, 'slide 4', '6fab8-slide4.jpg', 0);
+INSERT INTO `slides` (`id`, `title`, `image_url`, `description`, `active`) VALUES
+(3, 'slide 1', 'b2e8a-slide2.jpg', '', 0),
+(4, 'slide 2', '99397-slide1.jpg', '', 1),
+(5, 'slide 3', '75895-slide3.jpg', '', 1),
+(6, 'slide 4', '6fab8-slide4.jpg', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survei`
+--
+
+CREATE TABLE `survei` (
+  `id` smallint(6) NOT NULL,
+  `date` datetime NOT NULL,
+  `user` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survei_detail`
+--
+
+CREATE TABLE `survei_detail` (
+  `id` int(11) NOT NULL,
+  `survei` smallint(6) NOT NULL,
+  `question` smallint(2) NOT NULL,
+  `choice` smallint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -197,15 +241,15 @@ INSERT INTO `slides` (`id`, `title`, `image_url`, `active`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-`id` smallint(6) NOT NULL,
+CREATE TABLE `users` (
+  `id` smallint(6) NOT NULL,
   `username` varchar(50) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `role` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -224,37 +268,63 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `role`,
 -- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `maps`
 --
 ALTER TABLE `maps`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recommendation`
+--
+ALTER TABLE `recommendation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `result`
+--
+ALTER TABLE `result`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `slides`
 --
 ALTER TABLE `slides`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survei`
+--
+ALTER TABLE `survei`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survei_detail`
+--
+ALTER TABLE `survei_detail`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `username_2` (`username`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `username_2` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -264,32 +334,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `maps`
 --
 ALTER TABLE `maps`
-MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
+  MODIFY `id` smallint(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
+--
+-- AUTO_INCREMENT for table `recommendation`
+--
+ALTER TABLE `recommendation`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `result`
+--
+ALTER TABLE `result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `slides`
 --
 ALTER TABLE `slides`
-MODIFY `id` smallint(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` smallint(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `survei`
+--
+ALTER TABLE `survei`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `survei_detail`
+--
+ALTER TABLE `survei_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;

@@ -32,13 +32,13 @@
                             <h3><?php echo $question['title'];?></h3>
                             <div class="radio">
                               <label>
-                                <input type="radio" name="selectradio[<?php echo $i;?>]" value="choice1" class="radioselect">
+                                <input type="radio" name="selectradio[<?php echo $question['id'];?>]" value="choice1" class="radioselect">
                                 <?php echo $question['choice1'];?>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
-                                <input type="radio" name="selectradio[<?php echo $i;?>]" value="choice2" class="radioselect">
+                                <input type="radio" name="selectradio[<?php echo $question['id'];?>]" value="choice2" class="radioselect">
                                 <?php echo $question['choice2'];?>
                               </label>
                             </div>

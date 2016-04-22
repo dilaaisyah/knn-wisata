@@ -92,8 +92,30 @@
         }
 
         public function submit(){
-           $get_select = $this->input->post('selectradio');
-           print_r($get_select);
+            // insert survei data
+            $date = getdate();
+            $date = $date['year'].'-'.$date['mon'].'-'.$date['mday'].' '.$date['hours'].':'.$date['minutes'].':'.$date['seconds'];
+            $session_data = $this->session->userdata('loggedin');
+            $user_id = $session_data['id'];
+            $survei_data = array(
+                                'date' => $date,
+                                'user' => $user_id
+                            ); 
+            $survei_result = $this->get_model->insert_survei($survei_data);
+
+            // insert survei detail data
+            $get_select = $this->input->post('selectradio');
+            foreach ($get_select as $key => $value) {
+                $data[] = array(
+                                'survei' => $survei_result,
+                                'question' => $key,
+                                'choice' => str_replace('choice', '', $value)
+                            );
+            }
+            $result = $this->get_model->insert_survei_detail($data);
+
+            if($result) redirect('pages/question', 'refresh');
+            else echo 'error';
         }
 
         public function login(){
