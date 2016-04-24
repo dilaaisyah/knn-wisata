@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="container">
+    <div class="container login">
         <div class="row margin-vert-30">
             <!-- Login Box -->
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+            <div class="col-md-6 col-md-offset-3">
                 <?php echo form_open('pages/verifylogin', 'class="login-page"');?>
                     <div class="login-header margin-bottom-30">
                         <h2>Login to your account</h2>

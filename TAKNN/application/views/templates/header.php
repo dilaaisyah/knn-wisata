@@ -76,10 +76,25 @@
                                         <li>
                                             <a href="<?php echo base_url();?>pages/map">Maps</a>
                                         </li>
-                                        <?php if($this->session->userdata('loggedin')):?>
-                                        <li>
-                                            <a href="<?php echo base_url();?>pages/question">Questions</a>
-                                        </li>
+                                        <?php if($this->session->userdata('loggedin')):
+                                            if($survei != ''){
+                                                $survei_date = $survei->date;
+                                                $today = date('Y-m-d'); 
+                                                $date_diff = date_diff(date_create($today), date_create($survei_date), true); 
+                                                $date_diff = $date_diff->m;
+                                            }else{
+                                                $date_diff = 0;
+                                            }
+                                            if($survei == '' || $date_diff >= 3):?>
+                                                <li>
+                                                    <a href="<?php echo base_url();?>pages/question">Questions</a>
+                                                </li>
+                                            <?php endif;?>
+                                            <?php if($survei != ''):?>
+                                                <li>
+                                                    <a href="<?php echo base_url();?>pages/recommendation">Recommendation</a>
+                                                </li>
+                                            <?php endif;?>
                                         <?php endif;?>
                                         <?php if($this->session->userdata('loggedin')):?>
                                             <?php $session_data = $this->session->userdata('loggedin');

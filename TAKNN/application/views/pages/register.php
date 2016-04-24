@@ -1,8 +1,20 @@
+<?php if(isset($user)):
+    $username = $user['username'];
+    $firstname = $user['firstname'];
+    $lastname = $user['lastname'];
+    $email = $user['email'];
+else:
+    $username = '';
+    $firstname = '';
+    $lastname = '';
+    $email = '';
+endif;?>
+
 <div id="content">
-    <div class="container">
+    <div class="container register">
         <div class="row margin-vert-30">
             <!-- Register Box -->
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+            <div class="col-md-6 col-md-offset-3">
                 <?php echo form_open('pages/verifyregister', 'class="signup-page"');?>
                     <div class="signup-header">
                         <h2>Register a new account</h2>

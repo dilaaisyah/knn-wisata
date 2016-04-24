@@ -21,6 +21,11 @@
                         echo $format_date;?>
                     </div>
                     <!-- End Date -->
+                    <!-- Category -->
+                    <div class="blog-post-details-item blog-post-details-item-left">
+                        <?php echo $blog['category'];?>
+                    </div>
+                    <!-- End Category -->
                 </div>
                 <div class="blog-item">
                     <div class="clearfix"></div>

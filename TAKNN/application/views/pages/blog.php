@@ -38,13 +38,13 @@
 	                    <div class="blog-post-details-item blog-post-details-item-left">
 	                        <?php echo $blog['category'];?>
 	                    </div>
-	                    <!-- End Date -->
+	                    <!-- End Category -->
 	                </div>
 	                <!-- End Blog Item Details -->
 	                <!-- Blog Item Body -->
 	                <div class="blog">
 	                    <div class="clearfix"></div>
-	                    <div class="blog-post-body row margin-top-15">
+	                    <div class="blog-post-body row">
 	                        <div class="col-md-5"<?php if(!$blog['image']){echo ' style="text-align: center;"';}?>>
 	                            <?php if($blog['image']){?>
 	                            <img src="<?php echo base_url().'uploads/blogs/'.$blog['image'];?>" alt="<?php echo $blog['title'];?>">

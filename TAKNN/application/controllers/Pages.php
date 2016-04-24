@@ -1,28 +1,37 @@
 <?php
 	class Pages extends CI_Controller {
+        var $data;
+
 		public function __construct() {
             parent::__construct();
             $this->load->model('get_model');
             $this->load->helper(array('form'));
+
+            if($this->session->userdata('loggedin')){
+                $session_data = $this->session->userdata('loggedin');
+                $user_id = $session_data['id'];
+                $survei = $this->get_model->get_survei_date($user_id);
+                $this->data = array('user_id' => $user_id, 'survei' => $survei );
+            }
         }
 
         private function render_view($view = NULL, $data){
             if($view == 'map'){
-                $data['add_js'] = $data['map']['js'];
+                $this->data['add_js'] = $data['map']['js'];
             }else{
-                $data['add_js'] = '';
+                $this->data['add_js'] = '';
             }
             
-        	$this->load->view('templates/header', $data);
-        	$this->load->view('pages/'.$view, $data);
+        	$this->load->view('templates/header', $this->data);
+        	$this->load->view('pages/'.$view, $this->data);
 	        $this->load->view('templates/footer');
         }
 
         public function index(){
-        	$data['title'] = 'Homepage';
-        	$data['slides'] = $this->get_model->get_slides();
-            $data['blogs'] = $this->get_model->get_featured_blog();
-        	$this->render_view('home', $data);
+        	$this->data['title'] = 'Homepage';
+        	$this->data['slides'] = $this->get_model->get_slides();
+            $this->data['blogs'] = $this->get_model->get_featured_blog();
+        	$this->render_view('home', $this->data);
         }
 
         public function map(){
@@ -42,38 +51,38 @@
                 $this->googlemaps->add_marker($marker);
             }
 
-            $data['title'] = 'Maps';
-        	$data['map'] = $this->googlemaps->create_map();
-            $this->render_view('map', $data);
+            $this->data['title'] = 'Maps';
+        	$this->data['map'] = $this->googlemaps->create_map();
+            $this->render_view('map', $this->data);
         }
 
         public function gallery(){
-            $data['gallery'] = $this->get_model->get_gallery();
-            $data['title'] = 'Gallery';
-            $this->render_view('gallery', $data);
+            $this->data['gallery'] = $this->get_model->get_gallery();
+            $this->data['title'] = 'Gallery';
+            $this->render_view('gallery', $this->data);
         }
 
         public function blogs() {
             $page = $this->uri->segment(3, 1);
             $limit = 10;
-            $data['blogs'] = $this->get_model->get_blog($page, $limit);
-            $data['pagination'] = array(
+            $this->data['blogs'] = $this->get_model->get_blog($page, $limit);
+            $this->data['pagination'] = array(
                                     'count' => $this->get_model->count_blog(),
                                     'page' => $page,
                                     'limit' => $limit
                                   );
-            $data['sidebar'] = $this->get_model->get_sidebar_blog();
-            $data['title'] = 'Blog';
-            $this->render_view('blog', $data);
+            $this->data['sidebar'] = $this->get_model->get_sidebar_blog();
+            $this->data['title'] = 'Blog';
+            $this->render_view('blog', $this->data);
         }
 
         public function blog($id='') {
             $id = $this->uri->segment(3, '');
             if($id != ''){
-                $data['blog'] = $this->get_model->get_detail_blog($id);
-                $data['sidebar'] = $this->get_model->get_sidebar_blog();
-                $data['title'] = 'Blog Detail'.' - '.$data['blog']['title'];
-                $this->render_view('blog-detail', $data);
+                $this->data['blog'] = $this->get_model->get_detail_blog($id);
+                $this->data['sidebar'] = $this->get_model->get_sidebar_blog();
+                $this->data['title'] = 'Blog Detail'.' - '.$this->data['blog']['title'];
+                $this->render_view('blog-detail', $this->data);
             }else{
                 redirect('pages/blogs/', 'refresh');
             }
@@ -83,9 +92,9 @@
         	$this->load->helper('form');
 		    $this->load->library('form_validation');
 
-            $data['questions'] = $this->get_model->get_questions();
-            $data['title'] = 'Question';
-        	$this->render_view('question', $data);
+            $this->data['questions'] = $this->get_model->get_questions();
+            $this->data['title'] = 'Question';
+        	$this->render_view('question', $this->data);
         }
 
         public function submit(){
@@ -111,15 +120,20 @@
             }
             $result = $this->get_model->insert_survei_detail($data);
 
-            if($result) redirect('pages/question', 'refresh');
+            if($result) redirect('pages/recommendation', 'refresh');
             else echo 'error';
+        }
+
+        public function recommendation(){
+            $this->data['title'] = 'Recommendation';
+            $this->render_view('recommendation', $this->data);
         }
 
         public function login(){
             $this->load->helper('form');
 
-            $data['title'] = 'Login';
-            $this->render_view('login', $data);
+            $this->data['title'] = 'Login';
+            $this->render_view('login', $this->data);
         }
 
         public function verifylogin(){
@@ -187,6 +201,12 @@
 
             if($this->form_validation->run() == false){
                 $data['title'] = 'Register';
+                $data['user'] = array(
+                                    'username' => $this->input->post('username'),
+                                    'firstname' => $this->input->post('firstname'),
+                                    'lastname' => $this->input->post('lastname'),
+                                    'email' => $this->input->post('email')
+                                );
                 $this->render_view('register', $data);
             }else{
                 $username = $this->input->post('username');

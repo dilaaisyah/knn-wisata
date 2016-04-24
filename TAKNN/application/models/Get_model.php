@@ -48,8 +48,13 @@
             return $this->db->count_all_results();     
         }
 
-        public function get_detail_blog($id) {          
-            $query = $this->db->get_where('blogs', array('id' => $id));
+        public function get_detail_blog($id) {
+            $this->db->select('blogs.*, categories.title as category');
+            $this->db->from('blogs');
+            $this->db->join('categories', 'categories.id = blogs.category');
+            $this->db->where('publish', 1);           
+            $this->db->where('blogs.id', $id);           
+            $query = $this->db->get();
             return $query->row_array();        
         }
 
@@ -92,6 +97,13 @@
             $result = $this->db->insert_batch('survei_detail', $data);
             if ($result) return true;
             else return false;
+        }
+
+        public function get_survei_date($user){
+            $this->db->select('DATE(date) as date');
+            $this->db->order_by('date', 'DESC');
+            $query = $this->db->get_where('survei', array('user' => $user));
+            return $query->row();
         }
 	}
 ?>

@@ -83,7 +83,13 @@
                                     <a href="<?php echo base_url();?>">Home</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>pages/map">Map</a>
+                                    <a href="<?php echo base_url();?>pages/gallery">Gallery</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url();?>pages/blogs">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url();?>pages/map">Maps</a>
                                 </li>
                             </ul>
                         </div>
