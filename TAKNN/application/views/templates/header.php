@@ -17,13 +17,15 @@
         <link href="favicon.ico" rel="shortcut icon">
         <!-- Jquery -->
         <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.fancybox.js"></script>
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css">
         <!-- Template CSS -->
-        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/nexus.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/nexus.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.fancybox.css" media="screen" />
         <!-- Custom CSS -->
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet">
         <!-- Google Fonts-->

@@ -9,9 +9,6 @@
         private function render_view($view = NULL, $data){
             if($view == 'map'){
                 $data['add_js'] = $data['map']['js'];
-            }else if($view == 'gallery'){
-                $data['add_js'] = '<script type="text/javascript" src="'.base_url().'assets/js/jquery.fancybox.js"></script>
-                                   <link rel="stylesheet" type="text/css" href="'.base_url().'assets/css/jquery.fancybox.css" media="screen" />';
             }else{
                 $data['add_js'] = '';
             }

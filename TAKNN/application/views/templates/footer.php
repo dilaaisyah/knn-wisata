@@ -18,35 +18,35 @@
                             <div class="col-md-4 margin-bottom-20">
                                 <h3 class="margin-bottom-10">Popular Destination</h3>
                                 <div class="thumbs-gallery">
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image01.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image01.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image01.jpg" alt="image1.jpg" title="image 1">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image02.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image02.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image02.jpg" alt="image2.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image03.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image03.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image03.jpg" alt="image3.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image04.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image04.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image04.jpg" alt="image4.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image04.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image04.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image05.jpg" alt="image5.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image06.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image06.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image06.jpg" alt="image6.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image07.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image07.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image07.jpg" alt="image7.jpg">
                                         <i></i>
                                     </a>
-                                    <a class="thumbBox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image08.jpg">
+                                    <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image08.jpg">
                                         <img src="<?php echo base_url();?>assets/img/thumbsgallery/thumbs/image08.jpg" alt="image8.jpg">
                                         <i></i>
                                     </a>
