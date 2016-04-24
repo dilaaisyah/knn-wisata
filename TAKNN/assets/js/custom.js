@@ -33,14 +33,16 @@ $(document).ready(function(){
   });
 
   //POPUP
-  $(".fancybox").fancybox({
-      openEffect  : 'fade',
-      closeEffect : 'fade',
-      helpers : {
-        title : {
-          type : 'inside'
-        }
-    }
-  });
+  if ( $(".fancybox").length ) {
+    $(".fancybox").fancybox({
+        openEffect  : 'fade',
+        closeEffect : 'fade',
+        helpers : {
+          title : {
+            type : 'inside'
+          }
+      }
+    });
+  }
 
 });
