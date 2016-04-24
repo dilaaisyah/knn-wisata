@@ -25,15 +25,15 @@ endif;?>
                     <label>Username
                         <span class="color-red">*</span>
                     </label>
-                    <input class="form-control margin-bottom-20" type="text" name="username">
+                    <input class="form-control margin-bottom-20" type="text" name="username" value="<?php echo $username;?>">
                     <label>First Name</label>
-                    <input class="form-control margin-bottom-20" type="text" name="firstname">
+                    <input class="form-control margin-bottom-20" type="text" name="firstname" value="<?php echo $firstname;?>">
                     <label>Last Name</label>
-                    <input class="form-control margin-bottom-20" type="text" name="lastname">
+                    <input class="form-control margin-bottom-20" type="text" name="lastname" value="<?php echo $lastname;?>">
                     <label>Email Address
                         <span class="color-red">*</span>
                     </label>
-                    <input class="form-control margin-bottom-20" type="text" name="email">
+                    <input class="form-control margin-bottom-20" type="text" name="email" value="<?php echo $email;?>">
                     <div class="row">
                         <div class="col-sm-6">
                             <label>Password

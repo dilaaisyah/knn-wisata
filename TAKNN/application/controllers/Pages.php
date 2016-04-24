@@ -185,8 +185,8 @@
         public function register(){
             $this->load->helper('form');
 
-            $data['title'] = 'Register';
-            $this->render_view('register', $data);
+            $this->data['title'] = 'Register';
+            $this->render_view('register', $this->data);
         }
 
         public function verifyregister(){
@@ -200,14 +200,14 @@
             $this->form_validation->set_rules('confirm_pass', 'Confirmation Password', 'trim|required|matches[password]');
 
             if($this->form_validation->run() == false){
-                $data['title'] = 'Register';
-                $data['user'] = array(
+                $this->data['title'] = 'Register';
+                $this->data['user'] = array(
                                     'username' => $this->input->post('username'),
                                     'firstname' => $this->input->post('firstname'),
                                     'lastname' => $this->input->post('lastname'),
                                     'email' => $this->input->post('email')
                                 );
-                $this->render_view('register', $data);
+                $this->render_view('register', $this->data);
             }else{
                 $username = $this->input->post('username');
                 $password = md5($this->input->post('password'));
