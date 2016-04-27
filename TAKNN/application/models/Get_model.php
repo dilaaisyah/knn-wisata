@@ -105,5 +105,15 @@
             $query = $this->db->get_where('survei', array('user' => $user));
             return $query->row();
         }
+
+        public function get_last_survei($user){
+            $this->db->select('survei.date as date, survei_detail.dimension as dimension, survei_detail.result as result');
+            $this->db->from('survei');
+            $this->db->join('survei_detail', 'survei_detail.survei = survei.id');
+            $this->db->order_by('date', 'DESC');
+            $this->db->where('user', $user);   
+            $query = $this->db->get();
+            return $query->result_array();
+        }
 	}
 ?>

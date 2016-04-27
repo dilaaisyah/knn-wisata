@@ -1,6 +1,6 @@
 <?php
 	class Pages extends CI_Controller {
-        var $data;
+        var $data, $userId;
 
 		public function __construct() {
             parent::__construct();
@@ -9,9 +9,9 @@
 
             if($this->session->userdata('loggedin')){
                 $session_data = $this->session->userdata('loggedin');
-                $user_id = $session_data['id'];
-                $survei = $this->get_model->get_survei_date($user_id);
-                $this->data = array('user_id' => $user_id, 'survei' => $survei );
+                $this->userId = $session_data['id'];
+                $survei = $this->get_model->get_survei_date($this->userId);
+                $this->data = array('user_id' => $this->userId, 'survei' => $survei );
             }
         }
 
@@ -99,26 +99,65 @@
 
         public function submit(){
             // insert survei data
-            $date = getdate();
-            $date = $date['year'].'-'.$date['mon'].'-'.$date['mday'].' '.$date['hours'].':'.$date['minutes'].':'.$date['seconds'];
-            $session_data = $this->session->userdata('loggedin');
-            $user_id = $session_data['id'];
+            $date = date('Y-m-d H:i:s');
             $survei_data = array(
                                 'date' => $date,
-                                'user' => $user_id
+                                'user' => $this->userId
                             ); 
             $survei_result = $this->get_model->insert_survei($survei_data);
 
-            // insert survei detail data
+            // get choice
             $get_select = $this->input->post('selectradio');
-            foreach ($get_select as $key => $value) {
-                $data[] = array(
-                                'survei' => $survei_result,
-                                'question' => $key,
-                                'choice' => str_replace('choice', '', $value)
-                            );
+
+            // mbti rules
+            $mbti = array();
+            $mbti['I'] = array( '2'=>1, '5'=>2, '7'=>2, '10'=>1, '11'=>1, 
+                                '15'=>1, '20'=>1, '28'=>2, '29'=>1, '31'=>1, 
+                                '35'=>2, '38'=>1, '45'=>1, '52'=>2, '60'=>2 );
+            $mbti['S'] = array( '6'=>2, '8'=>1, '13'=>1, '16'=>1, '18'=>2, 
+                                '22'=>2, '25'=>1, '27'=>1, '34'=>1, '36'=>1, 
+                                '41'=>1, '43'=>1, '46'=>1, '51'=>1, '53'=>1 );
+            $mbti['T'] = array( '4'=>1, '8'=>2, '14'=>1, '17'=>1, '23'=>1, 
+                                '30'=>1, '32'=>2, '37'=>1, '39'=>2, '42'=>1, 
+                                '48'=>1, '49'=>2, '55'=>1, '57'=>1, '58'=>1 );
+            $mbti['J'] = array( '1'=>2, '3'=>1, '12'=>2, '19'=>1, '21'=>2, 
+                                '24'=>1, '26'=>2, '33'=>2, '40'=>2, '44'=>2, 
+                                '47'=>1, '50'=>2, '54'=>1, '56'=>1, '59'=>2 );
+            $mbti['E'] = array( '2'=>2,'5'=>1,'7'=>1,'10'=>2,'11'=>2,
+                                '15'=>2,'20'=>2,'28'=>1,'29'=>2,'31'=>2,
+                                '35'=>1,'38'=>2,'45'=>2,'52'=>1,'60'=>1 );
+            $mbti['N'] = array( '6'=>1,'8'=>2,'13'=>2,'16'=>2,'18'=>1,
+                                '22'=>1,'25'=>2,'27'=>2,'34'=>2,'36'=>2,
+                                '41'=>2,'43'=>2,'46'=>2,'51'=>2,'53'=>2 );
+            $mbti['F'] = array( '4'=>2,'9'=>1,'14'=>2,'17'=>2,'23'=>2,
+                                '30'=>2,'32'=>1,'37'=>2,'39'=>1,'42'=>2,
+                                '48'=>2,'49'=>1,'55'=>2,'57'=>2,'58'=>2 );
+            $mbti['P'] = array( '1'=>1,'3'=>2,'12'=>1,'19'=>2,'21'=>1,
+                                '24'=>2,'26'=>1,'33'=>1,'40'=>1,'44'=>1,
+                                '47'=>2,'50'=>1,'54'=>2,'56'=>2,'59'=>1);
+
+            // mbti calculation
+            $survei_detail = array();
+            foreach ($mbti as $dimensi => $mbti_result) {
+                $result = 0; $prosentase = 0;
+
+                foreach ($mbti_result as $key => $value) {
+                    $choice = str_replace('choice', '', $get_select[$key]);
+                    if($value == $choice ) $result++;
+                }
+
+                $prosentase = round(($result/15)*100);
+
+                // survei detail data
+                $survei_detail[] = array(
+                                    'survei' => $survei_result,
+                                    'dimension' => $dimensi,
+                                    'result' => $prosentase
+                                   );
             }
-            $result = $this->get_model->insert_survei_detail($data);
+
+            // insert survei detail data
+            $result = $this->get_model->insert_survei_detail($survei_detail);
 
             if($result) redirect('pages/recommendation', 'refresh');
             else echo 'error';
@@ -126,6 +165,8 @@
 
         public function recommendation(){
             $this->data['title'] = 'Recommendation';
+            $this->data['result'] = $this->get_model->get_last_survei($this->userId);
+
             $this->render_view('recommendation', $this->data);
         }
 
