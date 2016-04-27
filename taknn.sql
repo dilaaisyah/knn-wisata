@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Apr 22, 2016 at 04:40 PM
+-- Generation Time: Apr 27, 2016 at 05:29 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -155,13 +155,13 @@ INSERT INTO `questions` (`id`, `title`, `choice1`, `choice2`) VALUES
 (51, 'Pernyataan 51', 'Menggunakan keterampilan yang sudah dikuasai', 'Menyukai tantangan untuk menguasai keterampilan baru'),
 (52, 'Pernyataan 52', 'Membangun ide pada saat berbicara', 'Membangun ide dengan matang baru membicarakannya'),
 (53, 'Pernyataan 53', 'Memilih cara yang sudah ada dan sudah terbukti', 'Memilih cara yang unik dan belum dipraktekkan orang lain'),
-(55, 'Pernyataan 54', 'Hidup harus sudah diatur dari awal', 'Hidup seharusnya mengalir sesuai kondisi'),
-(56, 'Pernyataan 55', 'Standar harus ditegakkan di atas segalanya (itu menunjukkan kehormatan dan harga diri)', 'Perasaan manusia lebih penting dari sekadar standar (yang adalah benda mati)'),
-(57, 'Pernyataan 56', 'Daftar dan checklist adalah panduan penting', 'Daftar dan checklist adalah tugas dan beban'),
-(58, 'Pernyataan 57', 'Menuntut perlakuan yang adil dan sama pada semua orang', 'Menuntut perlakuan khusus sesuai karakteristik masing-masing orang'),
-(59, 'Pernyataan 58', 'Mementingkan sebab-akibat', 'Mementingkan nilai-nilai personal'),
-(60, 'Pernyataan 59', 'Puas ketika mampu beradaptasi dengan momentum yang terjadi', 'Puas ketika mampu menjalankan semuanya sesuai rencana'),
-(61, 'Pernyataan 60', 'Spontan, Easy Going, fleksibel', 'Berhati-hati, penuh pertimbangan, kaku');
+(54, 'Pernyataan 54', 'Hidup harus sudah diatur dari awal', 'Hidup seharusnya mengalir sesuai kondisi'),
+(55, 'Pernyataan 55', 'Standar harus ditegakkan di atas segalanya (itu menunjukkan kehormatan dan harga diri)', 'Perasaan manusia lebih penting dari sekadar standar (yang adalah benda mati)'),
+(56, 'Pernyataan 56', 'Daftar dan checklist adalah panduan penting', 'Daftar dan checklist adalah tugas dan beban'),
+(57, 'Pernyataan 57', 'Menuntut perlakuan yang adil dan sama pada semua orang', 'Menuntut perlakuan khusus sesuai karakteristik masing-masing orang'),
+(58, 'Pernyataan 58', 'Mementingkan sebab-akibat', 'Mementingkan nilai-nilai personal'),
+(59, 'Pernyataan 59', 'Puas ketika mampu beradaptasi dengan momentum yang terjadi', 'Puas ketika mampu menjalankan semuanya sesuai rencana'),
+(60, 'Pernyataan 60', 'Spontan, Easy Going, fleksibel', 'Berhati-hati, penuh pertimbangan, kaku');
 
 -- --------------------------------------------------------
 
@@ -220,7 +220,14 @@ CREATE TABLE `survei` (
   `id` smallint(6) NOT NULL,
   `date` datetime NOT NULL,
   `user` smallint(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `survei`
+--
+
+INSERT INTO `survei` (`id`, `date`, `user`) VALUES
+(1, '2016-04-27 17:02:21', 1);
 
 -- --------------------------------------------------------
 
@@ -231,9 +238,23 @@ CREATE TABLE `survei` (
 CREATE TABLE `survei_detail` (
   `id` int(11) NOT NULL,
   `survei` smallint(6) NOT NULL,
-  `question` smallint(2) NOT NULL,
-  `choice` smallint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `dimension` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `result` smallint(3) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `survei_detail`
+--
+
+INSERT INTO `survei_detail` (`id`, `survei`, `dimension`, `result`) VALUES
+(1, 1, 'I', 53),
+(2, 1, 'S', 33),
+(3, 1, 'T', 60),
+(4, 1, 'J', 53),
+(5, 1, 'E', 47),
+(6, 1, 'N', 67),
+(7, 1, 'F', 47),
+(8, 1, 'P', 47);
 
 -- --------------------------------------------------------
 
@@ -249,7 +270,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `role` varchar(15) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -258,7 +279,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `role`, `password`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin@gmail.com', 'administrator', '0192023a7bbd73250516f069df18b500'),
 (2, 'user', 'user', 'user', 'user@gmail.com', 'subscriber', '6ad14ba9986e3615423dfca256d04e3f'),
-(3, 'testing', 'testing', 'testing', 'test@test.com', 'subscriber', '25d55ad283aa400af464c76d713c07ad');
+(3, 'testing', 'testing', 'testing', 'test@test.com', 'subscriber', '25d55ad283aa400af464c76d713c07ad'),
+(4, 'ghaza', 'Ghaza', 'Hapsoro', 'ghaza@gmail.com', 'subscriber', '25d55ad283aa400af464c76d713c07ad');
 
 --
 -- Indexes for dumped tables
@@ -369,14 +391,14 @@ ALTER TABLE `slides`
 -- AUTO_INCREMENT for table `survei`
 --
 ALTER TABLE `survei`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `survei_detail`
 --
 ALTER TABLE `survei_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
