@@ -38,7 +38,6 @@
             $this->load->library('googlemaps');
 
             $config = array();
-            // $config['center'] = '-7.6196136, 111.3382043';
             $config['center'] = '-7.6577245, 112.8927697';
             $config['zoom'] = '8';
             $this->googlemaps->initialize($config);
@@ -94,21 +93,44 @@
 
             $this->data['questions'] = $this->get_model->get_questions();
             $this->data['title'] = 'Question';
-        	$this->render_view('question', $this->data);
+            // $this->render_view('question', $this->data);
+        	$this->render_view('question_batch', $this->data);
         }
 
         public function submit(){
+            // get choice
+            // $get_select = $this->input->post('selectradio');
+
+            // batch selection
+            $get_select = $this->input->post('all_selection');
+            $explode = explode(' ', $get_select); 
+            $i=1; $get_select = array();
+            foreach ($explode as $value) {
+                $get_select[$i] = $value;
+                $i++;
+            }
+
+            //calculate mbti
+            $mbti_result = $this->calculate_mbti($get_select);
+
             // insert survei data
             $date = date('Y-m-d H:i:s');
-            $survei_data = array(
+            $survei = array(
                                 'date' => $date,
                                 'user' => $this->userId
-                            ); 
-            $survei_result = $this->get_model->insert_survei($survei_data);
+                            );
 
-            // get choice
-            $get_select = $this->input->post('selectradio');
+            $survei = array_merge($survei, $mbti_result);
 
+            $knn = $this->calculate_knn($mbti_result);
+            
+            $result = $this->get_model->insert_survei($survei);
+
+            if($result) redirect('pages/recommendation', 'refresh');
+            else echo 'error';
+        }
+
+        private function calculate_mbti($selection){
             // mbti rules
             $mbti = array();
             $mbti['I'] = array( '2'=>1, '5'=>2, '7'=>2, '10'=>1, '11'=>1, 
@@ -137,30 +159,42 @@
                                 '47'=>2,'50'=>1,'54'=>2,'56'=>2,'59'=>1);
 
             // mbti calculation
-            $survei_detail = array();
+            $prosentase_result = array();
             foreach ($mbti as $dimensi => $mbti_result) {
                 $result = 0; $prosentase = 0;
 
                 foreach ($mbti_result as $key => $value) {
-                    $choice = str_replace('choice', '', $get_select[$key]);
+                    $choice = str_replace('choice', '', $selection[$key]);
                     if($value == $choice ) $result++;
                 }
-
                 $prosentase = round(($result/15)*100);
-
-                // survei detail data
-                $survei_detail[] = array(
-                                    'survei' => $survei_result,
-                                    'dimension' => $dimensi,
-                                    'result' => $prosentase
-                                   );
+                $prosentase_result[$dimensi] = $prosentase;
             }
 
-            // insert survei detail data
-            $result = $this->get_model->insert_survei_detail($survei_detail);
+            return $prosentase_result;
+        }
 
-            if($result) redirect('pages/recommendation', 'refresh');
-            else echo 'error';
+        private function calculate_knn($mbti){
+            // get all survei
+            $survei = $this->get_model->get_all_survei();
+            $dimensi = array('I', 'S', 'T', 'J', 'E', 'N', 'S', 'P');
+            
+            $euclidean_result = array(); $x=0;
+            foreach ($survei as $survei) {
+                $total = 0; 
+                for ($i=0; $i < 8; $i++) { 
+                    $key = $dimensi[$i];
+                    $total += pow(($survei[$key] - $mbti[$key]), 2); 
+                }
+                $euclidean = round(sqrt($total), 2);
+                $euclidean_result[$x] = $euclidean;
+                $x++;
+            }
+
+            // sort value from small to large
+            sort($euclidean_result);
+
+            return $euclidean_result;
         }
 
         public function recommendation(){
@@ -184,8 +218,8 @@
             $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
 
             if($this->form_validation->run() == false){
-                $data['title'] = 'Login';
-                $this->render_view('login', $data);
+                $this->data['title'] = 'Login';
+                $this->render_view('login', $this->data);
             }else{
                 redirect('/', 'refresh');
            }

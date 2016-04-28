@@ -93,12 +93,6 @@
             else return false;
         }
 
-        public function insert_survei_detail($data){
-            $result = $this->db->insert_batch('survei_detail', $data);
-            if ($result) return true;
-            else return false;
-        }
-
         public function get_survei_date($user){
             $this->db->select('DATE(date) as date');
             $this->db->order_by('date', 'DESC');
@@ -107,12 +101,16 @@
         }
 
         public function get_last_survei($user){
-            $this->db->select('survei.date as date, survei_detail.dimension as dimension, survei_detail.result as result');
-            $this->db->from('survei');
-            $this->db->join('survei_detail', 'survei_detail.survei = survei.id');
             $this->db->order_by('date', 'DESC');
             $this->db->where('user', $user);   
-            $query = $this->db->get();
+            $query = $this->db->get('survei');
+            return $query->result_array();
+        }
+
+        public function get_all_survei(){
+            $this->db->select('I, S, T, J, E, N, F, P');
+            $this->db->order_by('date', 'ASC');
+            $query = $this->db->get('survei');
             return $query->result_array();
         }
 	}
