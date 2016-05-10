@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: May 10, 2016 at 03:06 PM
+-- Generation Time: May 10, 2016 at 03:35 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -73,16 +73,18 @@ CREATE TABLE `maps` (
   `id` smallint(6) NOT NULL,
   `title` varchar(255) NOT NULL,
   `lat` varchar(255) NOT NULL,
-  `long` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `long` varchar(255) NOT NULL,
+  `permalink` text NOT NULL,
+  `permalink_text` varchar(255) NOT NULL DEFAULT 'go to article'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `maps`
 --
 
-INSERT INTO `maps` (`id`, `title`, `lat`, `long`) VALUES
-(1, 'Taman Nasional Bromo Tengger Semeru', '-8.0218694', '112.9502497'),
-(2, 'Taman Nasional Meru Betiri', '-8.2228539', '113.4668054');
+INSERT INTO `maps` (`id`, `title`, `lat`, `long`, `permalink`, `permalink_text`) VALUES
+(1, 'Taman Nasional Bromo Tengger Semeru', '-8.0218694', '112.9502497', 'http://127.0.0.1/taknn/pages/blog/1/', 'link bromo'),
+(2, 'Taman Nasional Meru Betiri', '-8.2228539', '113.4668054', 'http://127.0.0.1/taknn/pages/blog/1/', 'go to article');
 
 -- --------------------------------------------------------
 
@@ -619,7 +621,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `maps`
 --
 ALTER TABLE `maps`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `options`
 --

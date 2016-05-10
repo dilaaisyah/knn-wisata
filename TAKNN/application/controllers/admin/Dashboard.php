@@ -98,6 +98,8 @@ class Dashboard extends CI_Controller {
 		$crud->required_fields('title', 'lat', 'long');
 		$crud->columns('title', 'lat', 'long');
 
+		$crud->unset_texteditor('permalink', 'full_text');
+
 		$output = $crud->render();
 		$data = array('title' => 'Maps', 'subtitle' => '<i class="fa fa-map-marker"></i> Maps', 'index' => '0');
 		$output = (object) array_merge((array)$output, $data);

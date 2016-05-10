@@ -47,7 +47,15 @@
             $maps = $this->get_model->get_maps();
             foreach ($maps as $map) {
                 $marker = array();
-                $marker['infowindow_content'] = $map['title'];
+                if($map['permalink']){
+                    if($map['permalink_text']){
+                        $marker['infowindow_content'] = $map['title'].'<br><a href="'.$map['permalink'].'" target="_blank">'.$map['permalink_text'].'</a>';
+                    }else{
+                        $marker['infowindow_content'] = $map['title'].'<br><a href="'.$map['permalink'].'" target="_blank">go to article</a>';
+                    }
+                }else {
+                    $marker['infowindow_content'] = $map['title'];
+                }
                 $marker['position'] = "$map[lat], $map[long]";
                 $this->googlemaps->add_marker($marker);
             }
