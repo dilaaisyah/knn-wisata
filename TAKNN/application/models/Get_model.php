@@ -27,7 +27,7 @@
         }
 
         public function get_gallery() {          
-            $query = $this->db->get_where('slides', array('active' => '1'));
+            $query = $this->db->get('slides');
             return $query->result_array();        
         }
 
