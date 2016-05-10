@@ -6,19 +6,26 @@
                 <h2>Hasil Recomendasi</h2>
                 <p>Submit pertanyaan sukses, Hasilnya adalah sebagain berikut :</p>
                 <?php if(count($result)):
-                    foreach ($result as $value):
-                        echo '<h5>Tanggal Survei: '.$result[0]['date'].'</h5>';
-                        echo '<p>';
-                            echo ' I = '.$value['I'];
-                            echo ' S = '.$value['S'];
-                            echo ' T = '.$value['T'];
-                            echo ' J = '.$value['J'];
-                            echo ' E = '.$value['E'];
-                            echo ' N = '.$value['N'];
-                            echo ' F = '.$value['F'];
-                            echo ' P = '.$value['P'];
-                        echo '</p>';
-                    endforeach;
+                    echo '<h5>Tanggal Survei: '.$result->date.'</h5>';
+                    
+                    $i = $result->I; $e = $result->E; 
+                    $s = $result->S; $n = $result->N; 
+                    $t = $result->T; $f = $result->F; 
+                    $j = $result->J; $p = $result->P; 
+                    $sifat = '';
+                    if($i >= $e) $sifat .='I'; else $sifat .= 'E';
+                    if($s >= $n) $sifat .='S'; else $sifat .= 'N';
+                    if($t >= $f) $sifat .='T'; else $sifat .= 'F';
+                    if($j >= $p) $sifat .='J'; else $sifat .= 'P';
+                    echo '<p> SIFAT : <strong>'.$sifat.'</strong></p>';
+
+                    $recomen_result='';
+                    if(count($recomen)){
+                        foreach ($recomen as $value) {
+                            $recomen_result .= $value['recommendation'].', ';
+                        }
+                    }
+                    echo '<p> Recomendasi : <strong>'.substr($recomen_result, 0, -2).'</strong></p>';
                 endif;?>
             </div>
             <!-- End Main Column -->

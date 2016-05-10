@@ -1,21 +1,15 @@
                     <div class="container background-gray-lighter padding-vert-30">
                         <div class="row">
                             <!-- Contact Details -->
-                            <div class="col-md-4 margin-bottom-20">
+                            <?php if($options->contact_detail) :?>
+                            <div class="col-md-6 margin-bottom-20">
                                 <h3 class="margin-bottom-10">Contact Details</h3>
-                                <p>
-                                    <span class="fa-phone">Telephone:</span>(212)888-77-88
-                                    <br>
-                                    <span class="fa-envelope">Email:</span>
-                                    <a href="mailto:info@joomla51.com">info@joomla51.com</a>
-                                    <br>
-                                    <span class="fa-link">Website:</span>
-                                    <a href="http://www.joomla51.com">www.joomla51.com</a>
-                                </p>
+                                <?php echo $options->contact_detail;?>
                             </div>
+                            <?php endif;?>
                             <!-- End Contact Details -->
                             <!-- Thumbs Gallery -->
-                            <div class="col-md-4 margin-bottom-20">
+                            <!-- <div class="col-md-4 margin-bottom-20">
                                 <h3 class="margin-bottom-10">Popular Destination</h3>
                                 <div class="thumbs-gallery">
                                     <a class="thumbBox fancybox" rel="lightbox-thumbs" href="<?php echo base_url();?>assets/img/thumbsgallery/image01.jpg">
@@ -52,16 +46,17 @@
                                     </a>
                                 </div>
                                 <div class="clearfix"></div>
-                            </div>
+                            </div> -->
                             <!-- End Thumbs Gallery -->
-                            <!-- Disclaimer -->
-                            <div class="col-md-4 margin-bottom-20">
-                                <h3 class="margin-bottom-10">Disclaimer</h3>
-                                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit
-                                    augue duis dolore te feugait nulla facilisi.</p>
+                            <!-- About -->
+                            <?php if($options->about) :?>
+                            <div class="col-md-6 margin-bottom-20">
+                                <h3 class="margin-bottom-10">About Us</h3>
+                                <?php echo $options->about;?>
                                 <div class="clearfix"></div>
                             </div>
-                            <!-- End Disclaimer -->
+                            <?php endif;?>
+                            <!-- End About -->
                             <div class="clearfix"></div>
                         </div>
                     </div>

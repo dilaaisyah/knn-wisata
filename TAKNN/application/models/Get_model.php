@@ -5,6 +5,7 @@
             $this->load->database();
         }
 
+        // FRONT PAGE //
         public function get_questions() {	        
             $query = $this->db->get('questions');
             return $query->result_array();	        
@@ -104,14 +105,60 @@
             $this->db->order_by('date', 'DESC');
             $this->db->where('user', $user);   
             $query = $this->db->get('survei');
-            return $query->result_array();
+            return $query->row();
         }
 
         public function get_all_survei(){
-            $this->db->select('I, S, T, J, E, N, F, P');
+            $this->db->select('id, I, S, T, J, E, N, F, P');
             $this->db->order_by('date', 'ASC');
             $query = $this->db->get('survei');
             return $query->result_array();
+        }
+
+        public function get_recomendation($survei_id){
+            $this->db->select('recommendation.id as id, recommendation.recommendation as recommendation');
+            $this->db->from('result');
+            $this->db->join('recommendation', 'recommendation.id = result.recommendation');
+            $this->db->where('survei', $survei_id);   
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+
+        public function insert_recomendation($data){
+            return $this->db->insert_batch('result', $data); 
+        }
+
+        public function get_wisata($type, $budget){
+            if(strlen($type)==1) $this->db->where('type', $type);
+            else $this->db->like('type', $type, 'after');
+            $this->db->where('price'. $budget);
+            $query = $this->db->get('wisata');
+            return $query->result_array();
+        }
+
+        public function get_options(){
+            $this->db->order_by('id', 'ASC');
+            $query = $this->db->get('options');
+            return $query->row();
+        }
+
+        // ADMIN PAGE //
+        public function count_users() {          
+            $this->db->where('role', 'subscriber'); 
+            $this->db->from('users');
+            return $this->db->count_all_results();     
+        }
+        public function count_survei() {          
+            $this->db->from('survei');
+            return $this->db->count_all_results();     
+        }
+        public function cart_survei() {          
+            $query = $this->db->query("SELECT DATE_FORMAT(date, '%Y-%m') as date, count(id) as count FROM survei group by DATE_FORMAT(date, '%Y-%m') order by date ");
+            return $query->result_array();    
+        }
+        public function count_wisata() {          
+            $this->db->from('wisata');
+            return $this->db->count_all_results();     
         }
 	}
 ?>

@@ -13,6 +13,8 @@
                 $survei = $this->get_model->get_survei_date($this->userId);
                 $this->data = array('user_id' => $this->userId, 'survei' => $survei );
             }
+
+            $this->data['options'] = $this->get_model->get_options();
         }
 
         private function render_view($view = NULL, $data){
@@ -93,22 +95,22 @@
 
             $this->data['questions'] = $this->get_model->get_questions();
             $this->data['title'] = 'Question';
-            // $this->render_view('question', $this->data);
-        	$this->render_view('question_batch', $this->data);
+            $this->render_view('question', $this->data);
+        	// $this->render_view('question_batch', $this->data);
         }
 
         public function submit(){
             // get choice
-            // $get_select = $this->input->post('selectradio');
+            $get_select = $this->input->post('selectradio');
 
             // batch selection
-            $get_select = $this->input->post('all_selection');
-            $explode = explode(' ', $get_select); 
-            $i=1; $get_select = array();
-            foreach ($explode as $value) {
-                $get_select[$i] = $value;
-                $i++;
-            }
+            // $get_select = $this->input->post('all_selection');
+            // $explode = explode(' ', $get_select); 
+            // $i=1; $get_select = array();
+            // foreach ($explode as $value) {
+            //     $get_select[$i] = $value;
+            //     $i++;
+            // }
 
             //calculate mbti
             $mbti_result = $this->calculate_mbti($get_select);
@@ -124,9 +126,18 @@
 
             $knn = $this->calculate_knn($mbti_result);
             
+            // insert survei result
             $result = $this->get_model->insert_survei($survei);
 
-            if($result) redirect('pages/recommendation', 'refresh');
+            // get first key on knn result
+            reset($knn);
+            $first_key = key($knn);
+            $recomen = $this->get_recommendation($first_key, $result);
+
+            //insert recomendation result
+            $result_recomen = $this->get_model->insert_recomendation($recomen);
+
+            if($result && $result_recomen) redirect('pages/recommendation', 'refresh');
             else echo 'error';
         }
 
@@ -179,29 +190,70 @@
             $survei = $this->get_model->get_all_survei();
             $dimensi = array('I', 'S', 'T', 'J', 'E', 'N', 'S', 'P');
             
-            $euclidean_result = array(); $x=0;
-            foreach ($survei as $survei) {
-                $total = 0; 
-                for ($i=0; $i < 8; $i++) { 
-                    $key = $dimensi[$i];
-                    $total += pow(($survei[$key] - $mbti[$key]), 2); 
+            $euclidean_result = array();
+            if(count($survei)) {
+                foreach ($survei as $survei) {
+                    $total = 0; 
+                    for ($i=0; $i < 8; $i++) { 
+                        $key = $dimensi[$i];
+                        $total += pow(($survei[$key] - $mbti[$key]), 2); 
+                    }
+                    $euclidean = round(sqrt($total), 2);
+                    $id = $survei['id'];
+                    $euclidean_result[$id] = $euclidean;
                 }
-                $euclidean = round(sqrt($total), 2);
-                $euclidean_result[$x] = $euclidean;
-                $x++;
-            }
 
-            // sort value from small to large
-            sort($euclidean_result);
+                // sort value from small to large
+                asort($euclidean_result);
+            }
 
             return $euclidean_result;
         }
 
+        private function get_recommendation($knn_id, $survei_id){
+            // get recomendation by knn result
+            $recommendation = $this->get_model->get_recomendation($knn_id);
+            foreach ($recommendation as $key => $value) {
+                $recomen_result[$key] = array(
+                                            'survei' => $survei_id,
+                                            'recommendation' => $value['id']
+                                        );
+            }
+
+            return $recomen_result;
+        }
+
         public function recommendation(){
             $this->data['title'] = 'Recommendation';
-            $this->data['result'] = $this->get_model->get_last_survei($this->userId);
+            $get_survei = $this->get_model->get_last_survei($this->userId);
+            $recomen = $this->get_model->get_recomendation($get_survei->id);
+
+            $this->data['result'] = $get_survei;
+            $this->data['recomen'] = $recomen;
 
             $this->render_view('recommendation', $this->data);
+        }
+
+        public function plan($value=''){
+            $this->data['title'] = 'My Plan';
+
+            $value = $this->uri->segment(3, '');
+            if($value=='submit'){
+                $type = $this->input->post('type');
+                $budget = $this->input->post('budget');
+                $this->data['param_type'] = $type;
+                $this->data['param_budget'] = $budget;
+                
+                if($budget == '') $budget = 0;
+                if($budget >= 0 AND $budget <= 10000) $budget_option = '=1';
+                if ($budget > 10000 AND $budget <= 50000) $budget_option = '<=2';
+                if ($budget > 50000 AND $budget <= 100000) $budget_option = '<=3';
+                if ($budget > 100000) $budget_option = '<=4';
+                
+                $this->data['search_result'] = $this->get_model->get_wisata($type, $budget_option);
+            }
+
+            $this->render_view('plan', $this->data);
         }
 
         public function login(){
@@ -267,7 +319,7 @@
         public function verifyregister(){
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|is_unique[users.username]');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]|max_length[12]|is_unique[users.username]');
             $this->form_validation->set_rules('firstname', 'First Name', 'trim');
             $this->form_validation->set_rules('lastname', 'Last Name', 'trim');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
@@ -291,6 +343,7 @@
                         'firstname' => $this->input->post('firstname'),
                         'lastname' => $this->input->post('lastname'),
                         'email' => $this->input->post('email'),
+                        'create_date' => date('Y-m-d H:i:s'),
                         'password' => $password,
                         'role' => 'subscriber',
                 );

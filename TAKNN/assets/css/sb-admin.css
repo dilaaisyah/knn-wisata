@@ -225,3 +225,21 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+
+/*---- Admin style - custom ---*/
+.flexigrid div.form-div input[type="text"],
+.flexigrid div.form-div input[type="password"] {
+    padding: 5px 10px !important;
+    height: 100% !important;
+}
+.chzn-container-single .chzn-default,
+.chzn-container-single .chzn-single {
+    padding: 5px 10px !important;
+    height: 37px !important;
+}
+.chzn-container-single .chzn-single abbr { top: 12px !important; }
+.chzn-container-single .chzn-single div b { background-position: 0px 5px !important; }
+.chzn-container-single .chzn-drop,
+.chzn-container-single .chzn-search input { width: 100% !important; }
+

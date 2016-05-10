@@ -29,6 +29,11 @@
         <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
     <?php endforeach; ?>
 
+    <!-- jQuery -->
+    <?php if($index){ ?>
+        <script src="<?php echo base_url();?>assets/js/jquery.js"></script>
+    <?php }?>
+
     <!-- CRUD JS -->
     <?php foreach($js_files as $file): ?>
         <script src="<?php echo $file; ?>"></script>
@@ -87,24 +92,33 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list-alt"></i> Blogs <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="<?php echo base_url();?>admin/dashboard/blog">Blogs</a>
+                                <a href="<?php echo base_url();?>admin/dashboard/blog/">Blogs</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>admin/dashboard/category">Blog Category</a>
+                                <a href="<?php echo base_url();?>admin/dashboard/category/">Blog Category</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>admin/dashboard/question"><i class="fa fa-fw fa-question"></i> Questions</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/question/"><i class="fa fa-fw fa-question"></i> Questions</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>admin/dashboard/slide"><i class="fa fa-fw fa-picture-o"></i> Slides / Gallery</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/slide/"><i class="fa fa-fw fa-picture-o"></i> Slides / Gallery</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>admin/dashboard/map"><i class="fa fa-fw fa-map-marker"></i> Maps</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/map/"><i class="fa fa-fw fa-map-marker"></i> Maps</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>admin/dashboard/user"><i class="fa fa-fw fa-users"></i> Users</a>
+                        <a href="<?php echo base_url();?>admin/dashboard/wisata/"><i class="fa fa-fw fa-plane"></i> Wisata</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>admin/dashboard/survei/"><i class="fa fa-fw fa-file-text"></i> Survei</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>admin/dashboard/user/"><i class="fa fa-fw fa-users"></i> Users</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>admin/dashboard/options/"><i class="fa fa-fw fa-cog"></i> Options</a>
                     </li>
                 </ul>
             </div>

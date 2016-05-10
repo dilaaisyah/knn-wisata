@@ -51,11 +51,13 @@
                     <div id="header" class="container margin-top-10">
                         <div class="row">
                             <!-- Logo -->
+                            <?php if($options->logo) :?>
                             <div class="logo">
                                 <a href="<?php echo base_url();?>" title="logo">
-                                    <img src="<?php echo base_url();?>assets/img/logo.png" alt="Logo" />
+                                    <img src="<?php echo base_url().'uploads/others/'.$options->logo;?>" alt="Logo" />
                                 </a>
                             </div>
+                            <?php endif;?>
                             <!-- End Logo -->
                         </div>
                     </div>
@@ -95,6 +97,9 @@
                                                     <a href="<?php echo base_url();?>pages/recommendation">Recommendation</a>
                                                 </li>
                                             <?php endif;?>
+                                            <li>
+                                                <a href="<?php echo base_url();?>pages/plan">My Plan</a>
+                                            </li>
                                         <?php endif;?>
                                         <?php if($this->session->userdata('loggedin')):?>
                                             <?php $session_data = $this->session->userdata('loggedin');

@@ -7,12 +7,6 @@
                     <h2><?php echo $blog['title'];?></h2>
                 </div>
                 <div class="blog-post-details">
-                    <!-- Author Name -->
-                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
-                        <i class="fa fa-user color-gray-light"></i>
-                        <a href="#">Admin</a>
-                    </div>
-                    <!-- End Author Name -->
                     <!-- Date -->
                     <div class="blog-post-details-item blog-post-details-item-left">
                         <i class="fa fa-calendar color-gray-light"></i>

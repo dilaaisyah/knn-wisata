@@ -5,6 +5,7 @@ class Dashboard extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('get_model');
 
 		if($this->session->userdata('loggedin')){
      		$session_data = $this->session->userdata('loggedin');
@@ -29,7 +30,11 @@ class Dashboard extends CI_Controller {
     }
 
 	public function index(){
-		$this->render_view('dashboard', (object)array('output' => '' , 'js_files' => array() , 'css_files' => array(), 'index' => '1'));		
+		$output['user'] = $this->get_model->count_users(); 
+		$output['survei'] = $this->get_model->count_survei(); 
+		$output['wisata'] = $this->get_model->count_wisata(); 
+		$output['cart_survei'] = $this->get_model->cart_survei(); 
+		$this->render_view('dashboard', (object)array('output' => $output , 'js_files' => array() , 'css_files' => array(), 'index' => '1'));		
 	}
 
 	public function slide(){
@@ -118,6 +123,83 @@ class Dashboard extends CI_Controller {
 		$this->render_view('dashboard_view', $output);
 	}
 
+	public function wisata(){
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('wisata');
+		$crud->set_subject('Wisata');
+		$crud->required_fields('wisata', 'price');
+		$crud->columns('wisata', 'type', 'price');
+
+		$crud->field_type('type','multiselect',
+            			   array( '1' => 'Wisata Alam', '2' => 'Wisata Bahari', '3' => 'Wisata Sejarah', '4' => 'Wisata Reliji', 
+            			   		  '5' => 'Wisata Budaya', '6' => 'Wisata Pendidikan', '7' => 'Wisata Belanja', '8' => 'Wisata Kuliner', 
+            			   		  '9' => 'Wisata Keluarga', '10' => 'Wisata Malam', '11' => 'Agrowisata' ));
+		$crud->field_type('price','dropdown',
+            			   array( '1' => '0 - 10.000', '2' => '10.000 - 50.000', '3' => '50.000 - 100.000', '4' => '> 100.000' ));
+
+		$output = $crud->render();
+		$data = array('title' => 'Wisata', 'subtitle' => '<i class="fa fa-plane"></i> Wisata', 'index' => '0');
+		$output = (object) array_merge((array)$output, $data);
+
+		$this->render_view('dashboard_view', $output);
+	}
+
+	public function survei(){
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('survei');
+		$crud->set_subject('Survei');
+		$crud->set_relation('user','users','{firstname} {lastname}');
+		$crud->columns('date', 'user', 'I', 'S', 'T', 'J', 'E', 'N', 'F', 'P', 'result');
+
+		$crud->callback_column('result',array($this,'_callback_survei_result'));
+
+		$crud->unset_add();
+        $crud->unset_edit();
+        $crud->unset_delete();
+
+		$output = $crud->render();
+		$data = array('title' => 'Survei', 'subtitle' => '<i class="fa fa-file-text"></i> Survei', 'index' => '0');
+		$output = (object) array_merge((array)$output, $data);
+
+		$this->render_view('dashboard_view', $output);
+	}
+
+	public function _callback_survei_result($value, $row){
+		$i = $row->I; $e = $row->E; 
+        $s = $row->S; $n = $row->N; 
+        $t = $row->T; $f = $row->F; 
+        $j = $row->J; $p = $row->P; 
+
+        $sifat = '';
+        if($i >= $e) $sifat .='I'; else $sifat .= 'E';
+        if($s >= $n) $sifat .='S'; else $sifat .= 'N';
+        if($t >= $f) $sifat .='T'; else $sifat .= 'F';
+        if($j >= $p) $sifat .='J'; else $sifat .= 'P';
+
+	   	return $sifat;
+	}
+
+	public function options(){
+		$crud = new grocery_CRUD();
+
+		$crud->set_table('options');
+		$crud->set_subject('Options');
+		$crud->columns('logo', 'contact_detail', 'about');
+
+		$crud->set_field_upload('logo','uploads/others');
+
+		$crud->unset_add();
+        $crud->unset_delete();
+
+		$output = $crud->render();
+		$data = array('title' => 'Options', 'subtitle' => '<i class="fa fa-cog"></i> Options', 'index' => '0');
+		$output = (object) array_merge((array)$output, $data);
+
+		$this->render_view('dashboard_view', $output);
+	}
+
 	public function user(){
 		$crud = new grocery_CRUD();
 
@@ -131,7 +213,6 @@ class Dashboard extends CI_Controller {
  
 	    $crud->callback_before_insert(array($this,'encrypt_password_callback'));
 	    $crud->callback_before_update(array($this,'encrypt_password_callback'));
-	    // $crud->callback_edit_field('password',array($this,'decrypt_password_callback'));
 
 		$output = $crud->render();
 		$data = array('title' => 'User', 'subtitle' => '<i class="fa fa-users"></i> User', 'index' => '0');

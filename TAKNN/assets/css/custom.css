@@ -68,6 +68,16 @@
 .recent-post img{ max-width: 92px; }
 .blog-post-details-item { margin-bottom: 15px; }
 
+/*Plan page*/
+#wisata-result table { border: 2px solid #bc5e43; }
+#wisata-result table tr, 
+#wisata-result table td, 
+#wisata-result table th {
+  border: 1px solid #bc5e43;
+  padding: 10px;
+}
+#wisata-result table th{ color: #bc5e43; }
+
 
 /*RESPONSIVE*/
 
